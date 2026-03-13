@@ -42,10 +42,19 @@ Where we can select the "Type" as "WebDAV", the endpoint as the URL copied from 
 
 At this stage if we try to add the storage backend we will see the following error:
 
+For this operation to succeed we need an implementation of WebDAV that has "Range write support". One notable example of implementation that does not support "Range write support" is Nextcloud.
+If we try to use that we would be presented the following warning and although the data would be accessible, the storage would be in readonly mode:
+
 ![image](Readonly-WebDAV.png)
 
-This is because of a limitation on the WebDAV implementation of Nextcloud. In particular it does not have "Range write support" while OneData, by design supports only this way of writing as it is expected to write large amount of data. Selecting the "Read only" option allow to complete the configuration. Going back to the Files section we can then browse the files present on the imported WebDAV storage.
-
+OneData, by design supports only this way of writing as it is expected to write large amount of data. 
 {{% /alert %}}
 
-A similar procedure can be used and has been tested for XrootD however in this case as the Nextcloud tests, the "Range write support" was not available on the instance tested and the readonly access was possible.
+To successfully test the support for WebDAV we used [SabreDAV](https://sabre.io/).
+After the configuration is complete the 
+
+![image](DataHub-WebDAV-Files.png)
+
+Like with any other backend is possible to perform all the operation and upload files from the web interface as shown in the following screenshot:
+
+![image](DataHub-WebDAV-Upload.png)
